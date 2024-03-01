@@ -1,6 +1,6 @@
-## TCu29 Sale
+## CZUSD Gate V2
 
-Allows purchase of TCu29 up to $10,000 in one transaction, with no slippage.
+Exchange CZUSD for BNB, with dynamic fees based on the available collateral and recent volumes.
 
 ## Official Deployments
 
