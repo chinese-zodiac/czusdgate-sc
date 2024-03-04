@@ -4,7 +4,7 @@ Exchange CZUSD for BNB, with dynamic fees based on the available collateral and 
 
 ## Official Deployments
 
-BSC:0x035240D340450b50acd7b1b104c2F8b727d7bB76
+BSC:0xe3CB4dB558fB7BaF59eC71F5B178be02726ab265
 
 ## deployment
 

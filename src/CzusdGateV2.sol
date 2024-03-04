@@ -35,8 +35,6 @@ contract CzusdGateV2 is ICzusdGateV2, Ownable, ReentrancyGuard {
     uint256 public buyVolume;
     uint256 public lastBuy;
 
-    bool public isReceiving;
-
     constructor(
         IERC20MintableBurnable _czusd,
         WETH _wbnb,
@@ -48,10 +46,8 @@ contract CzusdGateV2 is ICzusdGateV2, Ownable, ReentrancyGuard {
         priceFeed = _bnbPriceFeed;
     }
 
-    receive() external payable {
-        require(isReceiving, "Not receiving");
-        isReceiving = false;
-    }
+    //Cannot do any checks since gas from WBNB withdraw does not forward gas
+    receive() external payable {}
 
     function sellBnbForCzusd(address _to) public payable {
         _buyUnwrapped(getCzusdOut(msg.value), msg.value, _to);
@@ -105,7 +101,6 @@ contract CzusdGateV2 is ICzusdGateV2, Ownable, ReentrancyGuard {
         require(soldCzusd >= 0.01 ether, "Trade too small");
         _updateSellVolume(soldCzusd);
         CZUSD.burnFrom(msg.sender, soldCzusd);
-        isReceiving = true;
         WBNB.withdraw(boughtBnb);
         (bool sent, ) = to.call{value: boughtBnb}("");
         require(sent, "Failed _sellUnwrapped");
